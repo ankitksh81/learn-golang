@@ -48,3 +48,11 @@
         </a>
     </ul>
 </div>
+
+<div>
+    <h2 style="font-size:28px; text-decoration:underline">
+        Go Packages
+    </h2>
+    <p style="font-size:18px">Visit <a href="https://pkg.go.dev/"><strong>https://pkg.go.dev</strong></a> to discover packages in Go.</p>
+    <p style="font-size:18px">Visit <a href="https://pkg.go.dev/std"><strong>https://pkg.go.dev/std</strong></a> to know more about standard library in Go.</p>
+</div>
