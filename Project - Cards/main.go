@@ -1,12 +1,14 @@
 package main
 
+import "fmt"
+
 func main() {
-	cards := deck{"Ace of Diamonds", newCard()} //dynamic array
-	cards = append(cards, "Six of Spades")
+	// cards := newDeck()
+	// cards.saveToFile("my deck.txt")
+	cards := newDeckFromFile("my deck.txt")
+	// fmt.Println([]byte(cards.toString()))
 
-	cards.print()
+	fmt.Println(cards)
 }
 
-func newCard() string {
-	return "Five of Diamonds"
-}
+// 21 done
