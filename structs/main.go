@@ -10,7 +10,9 @@ type contactInfo struct {
 type person struct {
 	firstName string
 	lastName  string
-	contact   contactInfo
+	// we can just write contackInfo without contact.
+	// similar to contactInfo of type contactInfo
+	contact contactInfo
 }
 
 func main() {
@@ -25,12 +27,15 @@ func main() {
 	jim := person{
 		firstName: "jim",
 		lastName:  "Party",
-		contact: contactInfo{
+		contact: contactInfo{ // contactInfo: contactInfo{....}
 			email:   "jim@gmail.com",
 			zipCode: 573939,
 		},
 	}
+	// fmt.Printf("%+v", jim)
+	jim.print()
+}
 
-	fmt.Printf("%+v", jim)
-
+func (p person) print() {
+	fmt.Printf("%+v", p) // general print func with receiver func
 }
