@@ -5,14 +5,31 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/spf13/viper"
 )
 
-const (
-	HOST = "localhost"
-	PORT = "8080"
-	USER = "admin"
-	PASS = "admin"
-)
+// Reading from .env file
+func viperEnv(key string) string {
+	viper.SetConfigFile(".env") // to set the config file
+	err := viper.ReadInConfig() // to read from the config set above
+	if err != nil {
+		log.Fatalf("Error reading from config file: %v", err)
+	}
+
+	value, ok := viper.Get(key).(string) // type assertion value from interface -> string
+	if !ok {
+		log.Fatalf("Invalid type")
+	}
+
+	return value
+}
+
+// Environment variables
+var HOST = viperEnv("HOST")
+var PORT = viperEnv("PORT")
+var USER = viperEnv("USER")
+var PASS = viperEnv("PASS")
 
 /*---------------------------
 	HTTP SERVER WITH AUTH
