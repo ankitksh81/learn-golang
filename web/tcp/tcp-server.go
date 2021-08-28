@@ -5,6 +5,8 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
 	"log"
 	"net"
 
@@ -30,6 +32,35 @@ var HOST = viperEnv("HOST")
 var PORT = viperEnv("PORT")
 var CONN_TYPE = viperEnv("CONN_TYPE")
 
+// func main() {
+// 	listner, err := net.Listen(CONN_TYPE, HOST+":"+PORT)
+// 	if err != nil {
+// 		log.Fatalf("Error starting tcp server: %v", err)
+// 	}
+// 	defer listner.Close()
+
+// 	log.Println("Listening on " + HOST + ":" + PORT)
+
+// 	for {
+// 		conn, err := listner.Accept()
+// 		if err != nil {
+// 			log.Fatalf("Error accepting: %v", err.Error())
+// 		}
+// 		log.Println(conn)
+// 	}
+// }
+
+// Reading data from a tcp connection using bufio
+func handleRequest(conn net.Conn) {
+	message, err := bufio.NewReader(conn).ReadString('\n')
+	if err != nil {
+		fmt.Println("Error reading: ", err.Error())
+	}
+
+	fmt.Println("Message Received from the client: ", string(message))
+	conn.Close()
+}
+
 func main() {
 	listner, err := net.Listen(CONN_TYPE, HOST+":"+PORT)
 	if err != nil {
@@ -44,6 +75,6 @@ func main() {
 		if err != nil {
 			log.Fatalf("Error accepting: %v", err.Error())
 		}
-		log.Println(conn)
+		go handleRequest(conn) // using "go" keyword to invoke a function in a Goroutine
 	}
 }
