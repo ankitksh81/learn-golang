@@ -1,3 +1,7 @@
+/*---------------------------
+	HTTP SERVER WITH AUTH
+----------------------------*/
+
 package main
 
 import (
@@ -31,10 +35,6 @@ var HOST = viperEnv("HOST")
 var PORT = viperEnv("PORT")
 var USER = viperEnv("USER")
 var PASS = viperEnv("PASS")
-
-/*---------------------------
-	HTTP SERVER WITH AUTH
-----------------------------*/
 
 func index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome!")

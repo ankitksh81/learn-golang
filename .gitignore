@@ -16,3 +16,4 @@
 
 runner-build
 .env
+*.log
