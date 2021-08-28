@@ -10,7 +10,6 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gorilla/handlers"
 	"github.com/spf13/viper"
 )
 
@@ -68,15 +67,43 @@ func BasicAuth(handler http.HandlerFunc, realm string) http.HandlerFunc {
 // 	}
 // }
 
-/*----------------------------------------------
+/*--------------------------------------------
 	HTTP SERVER WITH MUX WITH GZIP COMPRESSION
 ----------------------------------------------*/
 
+// func main() {
+// 	mux := http.NewServeMux()
+// 	mux.HandleFunc("/", index)
+// 	err := http.ListenAndServe(HOST+":"+PORT, handlers.CompressHandler(mux))
+// 	if err != nil {
+// 		log.Fatalf("error starting server: %v", err)
+// 	}
+// }
+
+/*----------------------
+	HTTP REQUEST ROUTING
+-----------------------*/
+
+// index defined above
+
+// login handler
+func login(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Login Page!")
+}
+
+// logout handler
+func logout(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Logout Page!")
+}
+
 func main() {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", index)
-	err := http.ListenAndServe(HOST+":"+PORT, handlers.CompressHandler(mux))
+	http.HandleFunc("/", index)
+	http.HandleFunc("/login", login)
+	http.HandleFunc("/logout", logout)
+
+	err := http.ListenAndServe(HOST+":"+PORT, nil)
 	if err != nil {
 		log.Fatalf("error starting server: %v", err)
+		return
 	}
 }

@@ -67,7 +67,7 @@ func handleRequest(conn net.Conn) {
 }
 
 func main() {
-	listner, err := net.Listen(CONN_TYPE, HOST+":"+PORT)
+	listner, err := net.Listen(CONN_TYPE, HOST+":"+PORT) // net.Listen("tcp", "localhost:8080")
 	if err != nil {
 		log.Fatalf("Error starting tcp server: %v", err)
 	}
