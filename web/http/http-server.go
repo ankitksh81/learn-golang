@@ -56,35 +56,44 @@ func BasicAuth(handler http.HandlerFunc, realm string) http.HandlerFunc {
 	}
 }
 
-// func main() {
-// 	http.HandleFunc("/", BasicAuth(index, "Please enter your username & password"))
-// 	// http.HandleFunc("/", index)
+/*
+func main() {
+	http.HandleFunc("/", BasicAuth(index, "Please enter your username & password"))
+	// http.HandleFunc("/", index)
 
-// 	// server
-// 	err := http.ListenAndServe(HOST+":"+PORT, nil)
-// 	if err != nil {
-// 		log.Fatalf("error starting server: %v", err)
-// 	}
-// }
+	// server
+	err := http.ListenAndServe(HOST+":"+PORT, nil)
+	if err != nil {
+		log.Fatalf("error starting server: %v", err)
+	}
+}
+*/
 
 /*--------------------------------------------
 	HTTP SERVER WITH MUX WITH GZIP COMPRESSION
 ----------------------------------------------*/
-
-// func main() {
-// 	mux := http.NewServeMux()
-// 	mux.HandleFunc("/", index)
-// 	err := http.ListenAndServe(HOST+":"+PORT, handlers.CompressHandler(mux))
-// 	if err != nil {
-// 		log.Fatalf("error starting server: %v", err)
-// 	}
-// }
+/*
+func main() {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", index)
+	err := http.ListenAndServe(HOST+":"+PORT, handlers.CompressHandler(mux))
+	if err != nil {
+		log.Fatalf("error starting server: %v", err)
+	}
+}
+*/
 
 /*----------------------
 	HTTP REQUEST ROUTING
 -----------------------*/
 
-// index defined above
+/*
+// index
+func index(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Welcome!")
+	// w.Write([]byte("Welcome!")) // another way to print using response writer
+}
+*/
 
 // login handler
 func login(w http.ResponseWriter, r *http.Request) {
