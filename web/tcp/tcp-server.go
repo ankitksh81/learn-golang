@@ -50,14 +50,19 @@ var CONN_TYPE = viperEnv("CONN_TYPE")
 // 	}
 // }
 
-// Reading data from a tcp connection using bufio
+/*----------------------------------------------
+  Reading data from a tcp connection using bufio
+  ---------------------------------------------*/
+
 func handleRequest(conn net.Conn) {
-	message, err := bufio.NewReader(conn).ReadString('\n')
+	message, err := bufio.NewReader(conn).ReadString('.') // Don't know why '\n' is not working as delimiter
 	if err != nil {
 		fmt.Println("Error reading: ", err.Error())
 	}
 
 	fmt.Println("Message Received from the client: ", string(message))
+	// write bytes back to tcp
+	conn.Write([]byte("Hello from tcp server" + "\n"))
 	conn.Close()
 }
 
