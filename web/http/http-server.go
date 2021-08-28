@@ -10,6 +10,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/spf13/viper"
 )
 
@@ -105,6 +106,7 @@ func logout(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Logout Page!")
 }
 
+/*
 func main() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/login", login)
@@ -115,4 +117,32 @@ func main() {
 		log.Fatalf("error starting server: %v", err)
 		return
 	}
+}
+*/
+
+/*----------------------------------------
+	HTTP REQUEST ROUTING USING GORILLA MUX
+------------------------------------------*/
+var GetRequestHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Hello World!"))
+})
+
+var PostRequestHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("It's a Post request!"))
+})
+
+// dynamic requests handler
+var PathVariableHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	name := vars["name"]
+	w.Write([]byte("Hi " + name + "\n"))
+})
+
+func main() {
+	router := mux.NewRouter()
+	router.Handle("/", GetRequestHandler).Methods("GET")
+	router.Handle("/post", PostRequestHandler).Methods("POST")
+	router.Handle("/hello/{name}", PathVariableHandler).Methods("GET", "PUT")
+
+	http.ListenAndServe(HOST+":"+PORT, router)
 }
