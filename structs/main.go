@@ -33,7 +33,14 @@ func main() {
 		},
 	}
 	// fmt.Printf("%+v", jim)
+	// jim.print()
+
+	jim.updateName("jimmy") // won't print jimmy
 	jim.print()
+}
+
+func (p person) updateName(newFirstName string) {
+	p.firstName = newFirstName
 }
 
 func (p person) print() {
